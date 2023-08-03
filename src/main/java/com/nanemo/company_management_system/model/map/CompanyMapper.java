@@ -7,7 +7,6 @@ import org.mapstruct.Mapping;
 
 import java.time.LocalDate;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Mapper
 public abstract class CompanyMapper {
@@ -29,4 +28,6 @@ public abstract class CompanyMapper {
     public abstract CompanyDto toDtoWithActiveYearAndEmployeeCountFields(Company company);
 
 
+    @Mapping(target = "userList", ignore = true)
+    public abstract Company companyDtoToEntity(CompanyDto companyDto);
 }

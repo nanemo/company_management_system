@@ -5,10 +5,12 @@ import com.nanemo.company_management_system.model.map.CompanyMapper;
 import com.nanemo.company_management_system.repository.CompanyRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
 @Service
+@Transactional(readOnly = true)
 @RequiredArgsConstructor
 public class CompanyService {
     private final CompanyRepository companyRepository;
@@ -24,4 +26,19 @@ public class CompanyService {
                 .orElse(null));
     }
 
+    @Transactional
+    public void saveCompany(CompanyDto companyDto) {
+        companyRepository.save(companyMapper.companyDtoToEntity(companyDto));
+    }
+
+    @Transactional
+    public void updateCompany(CompanyDto companyDto, Long id) {
+        companyDto.setId(id);
+        companyRepository.save(companyMapper.companyDtoToEntity(companyDto));
+    }
+
+    @Transactional
+    public void deleteCompany(Long id) {
+        companyRepository.deleteById(id);
+    }
 }
