@@ -4,6 +4,7 @@ import com.nanemo.company_management_system.model.dto.CompanyDto;
 import com.nanemo.company_management_system.service.CompanyService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -18,6 +19,11 @@ public class CompanyController {
     @GetMapping
     public List<CompanyDto> findAll() {
         return companyService.findAll();
+    }
+
+    @GetMapping("/{id}")
+    public CompanyDto findById(@PathVariable Long id){
+        return companyService.findById(id);
     }
 
 }

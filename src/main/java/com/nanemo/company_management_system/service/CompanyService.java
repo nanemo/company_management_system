@@ -19,5 +19,9 @@ public class CompanyService {
     }
 
 
+    public CompanyDto findById(Long id) {
+        return companyMapper.toDtoWithActiveYearAndEmployeeCountFields(companyRepository.findById(id)
+                .orElse(null));
+    }
 
 }

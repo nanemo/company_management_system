@@ -21,4 +21,6 @@ public class CompanyDto {
 
     private int activeYear;
 
+    private int employeeCount;
+
 }

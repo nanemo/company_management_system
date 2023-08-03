@@ -10,20 +10,23 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Mapper
-public interface CompanyMapper {
+public abstract class CompanyMapper {
+
     @Mapping(target = "activeYear", expression = "java(countActiveYear(company))")
-    CompanyDto toDto(Company company);
+    @Mapping(target = "employeeCount", ignore = true)
+    public abstract CompanyDto toDtoWithActiveYearField(Company company);
 
-
-    @Mapping(target = "userList", ignore = true)
-    Company toEntity(CompanyDto companyDto);
-
-    default List<CompanyDto> companyListToCompanyDtoList(List<Company> companyList) {
-        return companyList.stream().map(this::toDto).collect(Collectors.toList());
-    }
-
-    default int countActiveYear(Company company) {
+    protected int countActiveYear(Company company) {
         return LocalDate.now().getYear() - company.getCreateDate().getYear();
     }
+
+    public List<CompanyDto> companyListToCompanyDtoList(List<Company> companyList) {
+        return companyList.stream().map(this::toDtoWithActiveYearField).toList();
+    }
+
+    @Mapping(target = "activeYear", expression = "java(countActiveYear(company))")
+    @Mapping(target = "employeeCount", expression = "java(company.getUserList().size())")
+    public abstract CompanyDto toDtoWithActiveYearAndEmployeeCountFields(Company company);
+
 
 }
