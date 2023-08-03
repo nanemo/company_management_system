@@ -19,6 +19,6 @@ public class CompanyDto {
 
     private LocalDate createDate;
 
-    private LocalDate activeYear;
+    private int activeYear;
 
 }

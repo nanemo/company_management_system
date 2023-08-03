@@ -1,9 +1,6 @@
 package com.nanemo.company_management_system.model.dto;
 
 import com.nanemo.company_management_system.model.entity.User;
-import jakarta.persistence.CascadeType;
-import jakarta.persistence.Column;
-import jakarta.persistence.ManyToMany;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
