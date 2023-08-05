@@ -1,5 +1,6 @@
 package com.nanemo.company_management_system.model.entity;
 
+import com.nanemo.company_management_system.util.LocalDateConverter;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -22,6 +23,7 @@ public class Company {
     @Column(name = "name")
     private String name;
 
+    @Convert(converter = LocalDateConverter.class)
     @Column(name = "create_date")
     private LocalDate createDate;
 
