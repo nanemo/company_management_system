@@ -1,20 +1,21 @@
 package com.nanemo.company_management_system.model.map;
 
-import com.nanemo.company_management_system.model.dto.PositionDto;
 import com.nanemo.company_management_system.model.dto.UserDto;
-import com.nanemo.company_management_system.model.entity.Position;
 import com.nanemo.company_management_system.model.entity.User;
 import lombok.RequiredArgsConstructor;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
+import org.mapstruct.factory.Mappers;
 
 import java.util.List;
+import java.util.Optional;
 
-@Mapper
-@RequiredArgsConstructor
-public abstract class UserMapper {
-    private final CompanyMapper companyMapper;
-    private final PositionMapper positionMapper;
+import static com.nanemo.company_management_system.model.map.PositionMapper.userMapper;
+
+@Mapper(imports = UserMapper.class)
+public interface UserMapper {
+    CompanyMapper companyMapper = Mappers.getMapper(CompanyMapper.class);
+    PositionMapper positionMapper = Mappers.getMapper(PositionMapper.class);
 
     @Mapping(target = "id", source = "id")
     @Mapping(target = "firstName", source = "firstName")
@@ -22,11 +23,11 @@ public abstract class UserMapper {
     @Mapping(target = "birthDate", source = "birthdate")
     @Mapping(target = "companyDto", expression = "java(companyMapper.toDtoWithActiveYearField(user.getCompany()))")
     @Mapping(target = "email", source = "email")
-    @Mapping(target = "positionListDto", expression = "java(positionListToListDto(user.getPositionList()))")
-    public abstract UserDto toUserDto(User user);
+    @Mapping(target = "positionListDto", expression = "java(positionMapper.positionListToListDtoWithoutUserDtoList(user.getPositionList()))")
+    UserDto toUserDto(User user);
 
-    protected List<PositionDto> positionListToListDto(List<Position> positionList) {
-        return positionList.stream().map(positionMapper::toPositionDto).toList();
+    default List<UserDto> userListToUserDtoList(List<User> userList) {
+        return userList.stream().map(userMapper::toUserDto).toList();
     }
 
 }
