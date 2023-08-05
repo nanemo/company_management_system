@@ -2,6 +2,7 @@ package com.nanemo.company_management_system.controller;
 
 import com.nanemo.company_management_system.model.dto.CompanyDto;
 import com.nanemo.company_management_system.service.CompanyService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -26,13 +27,13 @@ public class CompanyController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED) // 201
-    public void createCompany(@RequestBody CompanyDto companyDto) {
+    public void createCompany(@Valid @RequestBody CompanyDto companyDto) {
         companyService.saveCompany(companyDto);
     }
 
     @PutMapping("/{id}")
     @ResponseStatus(HttpStatus.OK) // 200
-    public void updateCompany(@RequestBody CompanyDto companyDto, @PathVariable Long id) {
+    public void updateCompany(@Valid @RequestBody CompanyDto companyDto, @PathVariable Long id) {
         companyService.updateCompany(companyDto, id);
     }
 
