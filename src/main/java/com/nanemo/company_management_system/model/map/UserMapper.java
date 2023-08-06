@@ -27,8 +27,21 @@ public interface UserMapper {
     UserDto toUserDto(User user);
 
     default List<UserDto> userListToUserDtoList(List<User> userList) {
-        return userList.stream().map(userMapper::toUserDto).toList();
+        return userList.stream().map(this::toUserDto).toList();
     }
+
+    @Mapping(target = "id", source = "id")
+    @Mapping(target = "firstName", source = "firstName")
+    @Mapping(target = "lastName", source = "lastName")
+    @Mapping(target = "login", source = "login")
+    @Mapping(target = "password", source = "password")
+    @Mapping(target = "birthdate", source = "birthDate")
+    @Mapping(target = "company", source = "companyDto")
+    @Mapping(target = "email", source = "email")
+    @Mapping(target = "positionList", expression = "java(positionMapper.positionDtoListToEntityList(userDto.getPositionListDto()))")
+    User toUserEntity(UserDto userDto);
+
+
 
 }
 
