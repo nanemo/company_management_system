@@ -2,15 +2,11 @@ package com.nanemo.company_management_system.model.map;
 
 import com.nanemo.company_management_system.model.dto.UserDto;
 import com.nanemo.company_management_system.model.entity.User;
-import lombok.RequiredArgsConstructor;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.factory.Mappers;
 
 import java.util.List;
-import java.util.Optional;
-
-import static com.nanemo.company_management_system.model.map.PositionMapper.userMapper;
 
 @Mapper(imports = UserMapper.class)
 public interface UserMapper {

@@ -16,6 +16,12 @@ import org.springframework.web.bind.annotation.*;
 public class AuthController {
     private final UserValidate userValidate;
     private final UserRegistrationService registrationService;
+
+    @GetMapping("/login")
+    public String login(){
+        return "auth/login";
+    }
+
     @GetMapping("/register")
     public String registrationPage(@ModelAttribute("user") UserDto userDto, ModelMap modelMap) {
         modelMap.addAttribute("user", userDto);
@@ -30,7 +36,7 @@ public class AuthController {
         userValidate.validate(userDto, bindingResult);
 
         if (bindingResult.hasErrors()) {
-            return "auth/register";
+            return "redirect:/auth/register";
         }
 
         registrationService.registerUser(userDto);
