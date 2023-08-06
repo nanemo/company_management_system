@@ -5,11 +5,12 @@ import com.nanemo.company_management_system.service.UserRegistrationService;
 import com.nanemo.company_management_system.validate.UserValidate;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
+import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
-@RestController
+@Controller
 @RequiredArgsConstructor
 @RequestMapping("/auth")
 public class AuthController {
@@ -19,7 +20,7 @@ public class AuthController {
     public String registrationPage(@ModelAttribute("user") UserDto userDto, ModelMap modelMap) {
         modelMap.addAttribute("user", userDto);
 
-        return "auth/register";
+        return "auth/registration_page";
     }
 
     @PostMapping("/register")

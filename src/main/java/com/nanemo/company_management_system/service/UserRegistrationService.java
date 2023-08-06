@@ -18,7 +18,8 @@ public class UserRegistrationService {
     private final UserMapper userMapper;
 
     public Optional<UserDto> findByLogin(UserDto userDto) {
-        return Optional.ofNullable(userMapper.toUserDto(userRepository.findUserByLogin(userDto.getLogin()).orElse(null)));
+        return Optional.ofNullable(userMapper.toUserDto(userRepository.findUserByLogin(userDto.getLogin())
+                .orElse(null)));
     }
 
     public void registerUser(UserDto userDto) {
@@ -27,5 +28,5 @@ public class UserRegistrationService {
         userRepository.findUserByLogin(user.getLogin());
 
     }
-    
+
 }
