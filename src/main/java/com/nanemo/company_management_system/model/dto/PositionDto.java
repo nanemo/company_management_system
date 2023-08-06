@@ -1,6 +1,5 @@
 package com.nanemo.company_management_system.model.dto;
 
-import com.nanemo.company_management_system.model.entity.User;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -18,5 +17,5 @@ public class PositionDto {
 
     private String name;
 
-    private List<User> userList;
+    private List<UserDto> userDtoList;
 }
