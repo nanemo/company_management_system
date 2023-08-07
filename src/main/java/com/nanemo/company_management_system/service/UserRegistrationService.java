@@ -5,6 +5,8 @@ import com.nanemo.company_management_system.model.entity.User;
 import com.nanemo.company_management_system.model.map.UserMapper;
 import com.nanemo.company_management_system.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
@@ -12,6 +14,7 @@ import java.util.Optional;
 @Service
 @RequiredArgsConstructor
 public class UserRegistrationService {
+    private final PasswordEncoder encoder;
 
     private final UserRepository userRepository;
 
@@ -23,6 +26,9 @@ public class UserRegistrationService {
     }
 
     public void registerUser(UserDto userDto) {
+        userDto.setPassword(encoder.encode(userDto.getPassword()));
+        userDto.setR
+
         User user = userMapper.toUserEntity(userDto);
 
         userRepository.findUserByLogin(user.getLogin());
