@@ -5,7 +5,6 @@ import com.nanemo.company_management_system.model.entity.User;
 import com.nanemo.company_management_system.model.map.UserMapper;
 import com.nanemo.company_management_system.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -27,11 +26,11 @@ public class UserRegistrationService {
 
     public void registerUser(UserDto userDto) {
         userDto.setPassword(encoder.encode(userDto.getPassword()));
-        userDto.setR
+        userDto.setRole("ROLE_USER");
 
-        User user = userMapper.toUserEntity(userDto);
+        userRepository.findUserByLogin(userDto.getLogin());
 
-        userRepository.findUserByLogin(user.getLogin());
+        userRepository.save(userMapper.toUserEntity(userDto));
 
     }
 

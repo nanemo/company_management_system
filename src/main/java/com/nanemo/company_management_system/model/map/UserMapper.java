@@ -13,12 +13,9 @@ public interface UserMapper {
     CompanyMapper companyMapper = Mappers.getMapper(CompanyMapper.class);
     PositionMapper positionMapper = Mappers.getMapper(PositionMapper.class);
 
-    @Mapping(target = "id", source = "id")
-    @Mapping(target = "firstName", source = "firstName")
-    @Mapping(target = "lastName", source = "lastName")
-    @Mapping(target = "birthDate", source = "birthdate")
+    @Mapping(target = "password", ignore = true)
+    @Mapping(target = "role", ignore = true)
     @Mapping(target = "companyDto", expression = "java(companyMapper.toDtoWithActiveYearField(user.getCompany()))")
-    @Mapping(target = "email", source = "email")
     @Mapping(target = "positionListDto", expression = "java(positionMapper.positionListToListDtoWithoutUserDtoList(user.getPositionList()))")
     UserDto toUserDto(User user);
 
@@ -26,17 +23,11 @@ public interface UserMapper {
         return userList.stream().map(this::toUserDto).toList();
     }
 
-    @Mapping(target = "id", source = "id")
-    @Mapping(target = "firstName", source = "firstName")
-    @Mapping(target = "lastName", source = "lastName")
-    @Mapping(target = "login", source = "login")
-    @Mapping(target = "password", source = "password")
-    @Mapping(target = "birthdate", source = "birthDate")
+    @Mapping(target = "password", ignore = true)
+    @Mapping(target = "role", ignore = true)
     @Mapping(target = "company", source = "companyDto")
-    @Mapping(target = "email", source = "email")
     @Mapping(target = "positionList", expression = "java(positionMapper.positionDtoListToEntityList(userDto.getPositionListDto()))")
     User toUserEntity(UserDto userDto);
-
 
 
 }

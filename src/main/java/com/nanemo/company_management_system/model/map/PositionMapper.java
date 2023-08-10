@@ -11,8 +11,6 @@ import java.util.List;
 @Mapper
 public interface PositionMapper {
 
-    UserMapper userMapper = Mappers.getMapper(UserMapper.class);
-
     @Mapping(target = "id", source = "id")
     @Mapping(target = "name", source = "name")
     @Mapping(target = "userDtoList", ignore = true)
