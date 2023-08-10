@@ -3,10 +3,8 @@ package com.nanemo.company_management_system.controller;
 import com.nanemo.company_management_system.model.dto.UserDto;
 import com.nanemo.company_management_system.service.UserService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -30,6 +28,5 @@ public class UserController {
     public List<UserDto> findUserById(@PathVariable("position_name") String positionName) {
         return userService.findUsersWithPositionName(positionName);
     }
-
 
 }

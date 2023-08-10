@@ -26,8 +26,7 @@ public class UserService {
 
     public List<UserDto> findUsersWithPositionName(String positionName) {
         List<User> usersWithPositionName = userRepository.findUsersWithPositionName(positionName);
-        System.out.println(usersWithPositionName + "-----------");
-
         return userMapper.userListToUserDtoList(usersWithPositionName);
     }
+
 }
